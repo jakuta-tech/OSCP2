@@ -6396,7 +6396,8 @@ net localgroup "Remote Management Users" /add <USERNAME>
 cmdkey /list
 rundll32 keymgr.dll, KRShowKeyMgr
 reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
-reg query HKEY_CURRENT_USER\Software\<USERNAME>\PuTTY\Sessions\ /f "Proxy" /s
+reg query HKCU\Software\SimonTatham\PuTTY\Sessions /t REG_SZ /s
+reg query HKCU\Software\SimonTatham\PuTTY\Sessions\ /f "Proxy" /s
 type C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config\web.config | findstr connectionString
 ```
 
@@ -6471,7 +6472,8 @@ type C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config\web.config | findstr
 ###### PuTTY
 
 ```cmd
-reg query HKEY_CURRENT_USER\Software\<USERNAME>\PuTTY\Sessions\ /f "Proxy" /s
+reg query HKCU\Software\SimonTatham\PuTTY\Sessions /t REG_SZ /s
+reg query HKCU\Software\SimonTatham\PuTTY\Sessions\ /f "Proxy" /s
 ```
 
 ###### Unattended Windows Installations
